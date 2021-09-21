@@ -1,5 +1,4 @@
 import { registerWebPlugin, WebPlugin } from '@capacitor/core';
-
 import { CapacitorFirebaseDynamicLinksPlugin, LinkConfig } from './definitions';
 
 export class CapacitorFirebaseDynamicLinksWeb extends WebPlugin implements CapacitorFirebaseDynamicLinksPlugin {

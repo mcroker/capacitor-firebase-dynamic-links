@@ -5,10 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import com.getcapacitor.*
+import com.getcapacitor.annotation.CapacitorPlugin
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 
-@NativePlugin
+@CapacitorPlugin
 class CapacitorFirebaseDynamicLinks : Plugin() {
     @PluginMethod
     fun createDynamicLink(call: PluginCall) {
@@ -16,8 +17,7 @@ class CapacitorFirebaseDynamicLinks : Plugin() {
         try {
             val builder = FirebaseDynamicLinks.getInstance()
                     .createDynamicLink()
-                    .setDomainUriPrefix(call.getString("domainUriPrefix"))
-
+                    .setDomainUriPrefix(call.getString("domainUriPrefix")!!)
                     .setLink(Uri.parse(call.getString("uri")))
 
             buildAndroidParameters(call, builder)
@@ -41,7 +41,7 @@ class CapacitorFirebaseDynamicLinks : Plugin() {
 
         val builder = FirebaseDynamicLinks.getInstance()
                 .createDynamicLink()
-                .setDomainUriPrefix(call.getString("domainUriPrefix"))
+                .setDomainUriPrefix(call.getString("domainUriPrefix")!!)
 
                 .setLink(Uri.parse(call.getString("uri")))
 
@@ -130,7 +130,7 @@ class CapacitorFirebaseDynamicLinks : Plugin() {
             val androidParameterBuilder = DynamicLink.AndroidParameters.Builder()
 
             if (androidParameters.getInteger("minimumVersion") != null) {
-                androidParameterBuilder.minimumVersion = androidParameters.getInteger("minimumVersion")
+                androidParameterBuilder.minimumVersion = androidParameters.getInteger("minimumVersion")!!
             }
 
             if (androidParameters.getString("fallbackUrl") != null) {
